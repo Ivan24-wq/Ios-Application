@@ -1,10 +1,38 @@
 workflows:
-  ios-unsigned:
-    name: iOS Unsigned Build
+  android-release:
+    name: Android Release
     environment:
-      flutter: stable
+      flutter: "3.29.3"       
+      xcode: latest           
+      cocoapods: default      
+
     scripts:
-      - flutter pub get
-      - flutter build ipa --release --no-codesign
+      - name: Проверка окружения
+        script: |
+          flutter --version
+          dart --version
+          flutter doctor -v
+
+      - name: Восстановление кеша
+        script: flutter pub cache repair
+
+      - name: Установка зависимостей
+        script: |
+          flutter clean
+          flutter pub get
+
+      - name: Сборка APK
+        script: flutter build apk --release --dart-define=APP_ENV=production
+
+      - name: Сборка App Bundle
+        script: flutter build appbundle --release --dart-define=APP_ENV=production
+
     artifacts:
-      - build/ios/ipa/*.ipa
+      - build/**/outputs/**/*.apk
+      - build/**/outputs/**/*.aab
+      - build/**/outputs/**/mapping.txt
+
+    publishing:
+      email:
+        recipients:
+          - your-email@example.com
