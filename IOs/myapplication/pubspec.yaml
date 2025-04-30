@@ -1,22 +1,16 @@
-name: myapplication
-description: "A new Flutter project."
-publish_to: 'none'
+scripts:
+  - name: Install Flutter dependencies
+    script: |
+      cd app
+      flutter pub get
 
-version: 1.0.0+1
+  - name: Install CocoaPods dependencies
+    script: |
+      cd app/ios
+      pod install --repo-update
+      cd ../..
 
-environment:
-  sdk: '>=3.7.2 <4.0.0'  
-  flutter: '>=3.29.0'     
-
-dependencies:
-  flutter:
-    sdk: flutter
-  cupertino_icons: ^1.0.8
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^5.0.0
-
-flutter:
-  uses-material-design: true
+  - name: Build IPA (unsigned)
+    script: |
+      cd app
+      flutter build ipa --release --no-codesign --dart-define=APP_ENV=production
