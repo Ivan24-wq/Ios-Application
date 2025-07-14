@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage">
+
+
+    <VerticalStackLayout>
+        <Image
+Source="password.png"
+HeightRequest="120"
+Aspect="AspectFit"
+HorizontalOptions="Center"/>
+        <Entry x:Name="PasswordLength"
+        Placeholder="Введите длину паролей " />
+
+        <Button Clicked="Button_Clicked"
+        Text="Сгенерировать пароль"
+        FontSize="22"
+        BackgroundColor="Yellow"
+        TextColor="Black"
+        FontAttributes="Italic"
+        HorizontalOptions="Center"
+        WidthRequest="200"
+        CornerRadius="15"/>
+
+        <Label x:Name="GeneratedPassword"
+            Text="Ваш пароль: "
+               FontSize="21"
+               TextColor="Black"
+               HorizontalOptions="Start"
+               FontAttributes="Bold"/>
+
+        <Label x:Name="Outputtext"
+               Text=""
+               TextColor="Red"
+               FontSize="30"
+               FontAttributes="Bold"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>
