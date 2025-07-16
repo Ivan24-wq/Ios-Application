@@ -24,11 +24,10 @@ workflows:
           dotnet workload list
 
       - name: Restore NuGet packages (iOS only)
-          script: |
-            export PATH="$HOME/.dotnet:$PATH"
-            export DOTNET_ROOT="$HOME/.dotnet"
-            dotnet restore MauiApp1.csproj -p:TargetFramework=net9.0-ios
-
+        script: |
+          export PATH="$HOME/.dotnet:$PATH"
+          export DOTNET_ROOT="$HOME/.dotnet"
+          dotnet restore MauiApp1.csproj -p:TargetFramework=net9.0-ios
 
       - name: Build unsigned IPA (iOS only)
         script: |
