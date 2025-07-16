@@ -2,31 +2,28 @@ workflows:
   build-ios-maui-altstore:
     name: Build unsigned .NET MAUI IPA for AltStore
     environment:
-      xcode: latest
+      groups:
+        - maui_group
       vars:
         DOTNET_VERSION: "9.0.301"
-        USER_NAME: "Мой пароль"  # Не рекомендуется хранить пароли прямо здесь
-        PASSWORD: "Мой пароль"   # Лучше использовать секреты (secrets)
     scripts:
-      - name: Install .NET SDK
+      - name: Install .NET SDK with PATH update
         script: |
-          curl -O https://dot.net/v1/dotnet-install.sh
+          curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
           chmod +x dotnet-install.sh
-          ./dotnet-install.sh -c $DOTNET_VERSION --install-dir /usr/local/share/dotnet
-          export PATH="/usr/local/share/dotnet:$PATH"
+          ./dotnet-install.sh --channel $DOTNET_VERSION --install-dir "$HOME/.dotnet"
+          echo 'export PATH="$HOME/.dotnet:$PATH"' >> ~/.zshrc
+          source ~/.zshrc
+          dotnet --version
       - name: Install MAUI workload
         script: |
-          dotnet workload install maui --version $DOTNET_VERSION
+          dotnet workload install maui-ios --version $DOTNET_VERSION
+          dotnet workload list
       - name: Restore NuGet packages
         script: |
           dotnet restore MauiApp1.csproj
       - name: Build unsigned IPA
         script: |
-          dotnet publish MauiApp1.csproj -f net9.0-ios -c Release -o ./publish -p:BuildIpa=true -p:EnableCodeSigning=false
-          
-      - name: Use credentials (example)
-        script: |
-          echo "User name is: \"$USER_NAME\""
-          echo "Password is: \"$PASSWORD\""
+          dotnet build MauiApp1.csproj -f net9.0-ios -c Release -p:BuildIpa=true -p:EnableCodeSigning=false -p:ArchiveOnBuild=true
     artifacts:
-      - publish/**/*.ipa
+      - bin/Release/net9.0-ios/ios-arm64/*.ipa
