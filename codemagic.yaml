@@ -22,7 +22,7 @@ workflows:
           dotnet restore MauiApp1.csproj
       - name: Build unsigned IPA
         script: |
-          dotnet build MauiApp1.csproj -f net9.0-ios -c Release -p:BuildIpa=true -p:EnableCodeSigning=false
+          dotnet publish MauiApp1.csproj -f net9.0-ios -c Release -o ./publish -p:BuildIpa=true -p:EnableCodeSigning=false
           
       - name: Use credentials (example)
         script: |
