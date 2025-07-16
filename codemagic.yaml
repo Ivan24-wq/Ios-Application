@@ -21,6 +21,7 @@ workflows:
           export PATH="$HOME/.dotnet:$PATH"
           export DOTNET_ROOT="$HOME/.dotnet"
           dotnet workload install maui-ios --sdk-version $DOTNET_VERSION
+          dotnet workload restore
           dotnet workload list
 
       - name: Restore NuGet packages (iOS only)
