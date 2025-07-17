@@ -21,8 +21,8 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>My_password</ApplicationTitle>
-		<ApplicationDisplayName>My_password</ApplicationDisplayName>
+		<ApplicationTitle>Мой пароль</ApplicationTitle>
+		<ApplicationDisplayName>Мой пароль</ApplicationDisplayName>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.mauiapp1</ApplicationId>
