@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DAzAckDxxcA=",
+  "dgSpecHash": "VWa6kdzhqOQ=",
   "success": true,
-  "projectFilePath": "F:\\new\\MauiApp1\\MauiApp1\\MauiApp1.csproj",
+  "projectFilePath": "F:\\ListApp\\Shopping-LIsts\\MauiApp1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Darkghost\\.nuget\\packages\\googlegson\\2.11.0.5\\googlegson.2.11.0.5.nupkg.sha512",
     "C:\\Users\\Darkghost\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.0\\microsoft.extensions.configuration.9.0.0.nupkg.sha512",
@@ -122,7 +122,6 @@
     "C:\\Users\\Darkghost\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.7\\microsoft.netcore.app.ref.9.0.7.nupkg.sha512",
     "C:\\Users\\Darkghost\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.7\\microsoft.netcore.app.ref.9.0.7.nupkg.sha512",
     "C:\\Users\\Darkghost\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.7\\microsoft.netcore.app.ref.9.0.7.nupkg.sha512",
-    "C:\\Users\\Darkghost\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.22621.57\\microsoft.windows.sdk.net.ref.10.0.22621.57.nupkg.sha512",
     "C:\\Users\\Darkghost\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"
   ],
   "logs": []

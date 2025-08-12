@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Этот код был создан программным средством.
-    Он был создан на основе файла шаблона F:\new\MauiApp1\MauiApp1\Platforms\Android\AndroidManifest.xml
+    Он был создан на основе файла шаблона D:\My program\MauiApp1\MauiApp1\Platforms\Android\AndroidManifest.xml
     Изменения, внесенные в этот файл, могут привести к неправильному поведению и будут потеряны
     в случае повторного создания содержимого.
     -->
@@ -9,8 +9,8 @@
   <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="35" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.INTERNET" />
-  <application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true" android:name="crc64e632a077a20c694c.MainApplication" android:label="Мой пароль" android:debuggable="true" android:extractNativeLibs="true">
-    <activity android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:launchMode="singleTop" android:theme="@style/Maui.MainTheme" android:name="crc64e632a077a20c694c.MainActivity" android:exported="true">
+  <application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:name="crc64e632a077a20c694c.MainApplication" android:label="Список покупок" android:debuggable="true" android:extractNativeLibs="true">
+    <activity android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:launchMode="singleTop" android:theme="@style/Maui.SplashTheme" android:name="crc64e632a077a20c694c.MainActivity" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />

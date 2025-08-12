@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0-ios</TargetFrameworks>
-
+		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
@@ -22,11 +21,11 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>Мой пароль</ApplicationTitle>
+		<ApplicationTitle>Твои покупки</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.mauiapp1</ApplicationId>
-
+		<ApplicationId>com.companyname.mauiapp1</ApplicationId> 
+		
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
@@ -40,32 +39,25 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+
 	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.png" BaseSize="128,128" />
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.png" BaseSize="128,128" Color="#008000" />
+
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
-		<MauiImage Update="Resources\Images\settings_dark.png">
-		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</MauiImage>
-		<MauiImage Update="Resources\Images\settings_white.png">
-		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</MauiImage>
+
+		<MauiIcon Include="Resources\AppIcon\appicon.png"/>
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
-
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>
 
-	<ItemGroup>
-	  <None Remove="Resources\Splash\splash.png" />
+		<MauiSplashScreen Include="Resources\Images\card.png" Color="#FFFF00" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -74,11 +66,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Resources\AppIcon\" />
+	  <MauiXaml Update="SecondPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\Splash\splash.png" />
+	  <Folder Include="Resources\AppIcon\" />
+	  <Folder Include="Resources\Splash\" />
 	</ItemGroup>
 
 </Project>

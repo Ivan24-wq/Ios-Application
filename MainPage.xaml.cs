@@ -1,63 +1,61 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Microsoft.Maui.Controls;
-
+using System.Collections.Specialized;
+using System.Text.Json;
 namespace MauiApp1
 {
     public partial class MainPage : ContentPage
     {
-        
+        private ObservableCollection<string> shoppingLIst = new ObservableCollection<string>();
 
         public MainPage()
         {
             InitializeComponent();
 
-            var settingItem = new ToolbarItem
-            {
-                Order = ToolbarItemOrder.Primary,
-                Priority = 0,
-            };
-            settingItem.Clicked += OnSettingsClicked;
+            LoadShoppingList();
+            shoppingLIst.CollectionChanged += ShoppingList_CollectionChanged;
+            BindingContext = this;
+         
+        }
 
-            
-            if (Application.Current.RequestedTheme == AppTheme.Dark)
-            {
-                settingItem.IconImageSource = "settings_dark.png";
-            } else if(Application.Current.RequestedTheme == AppTheme.Light)
-            {
-                settingItem.IconImageSource = "settings_light.png";
-            }
-            ToolbarItems.Add(settingItem);
-            }
-        private void Button_Clicked(object sender, EventArgs e)
+        private void ShoppingList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (int.TryParse(PasswordLength.Text, out int size))
-            {
-                if (size < 3)
-                {
-                    Outputtext.Text = "Ошибка! Пароль должен быть не короче 3 символов.";
-                    GeneratedPassword.Text = "Ваш пароль: ";
-                    return;
-                }
-                string symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_=*/";
-                string password = "";
-                Random rand = new Random();
+            SaveShoppingList();
+        }
 
-                for (int i = 0; i < size; i++)
-                {
-                    int index = rand.Next(symbols.Length);
-                    password += symbols[index];  
-                }
-
-                GeneratedPassword.Text = $"Ваш пароль: {password}";
-                Outputtext.Text = "";
-            }
-            else
+        private void SaveShoppingList()
+        {
+            string json = JsonSerializer.Serialize(shoppingLIst);
+            Preferences.Set("ShoppingList", json);
+        }
+        private void LoadShoppingList()
+        {
+            string json = Preferences.Get("ShoppingList", string.Empty);
+            if (!string.IsNullOrEmpty(json))
             {
-                Outputtext.Text = "Введите корректное число!";
-                GeneratedPassword.Text = "Ваш пароль: ";
+                var items = JsonSerializer.Deserialize<ObservableCollection<string>>(json);
+                if(items != null)
+                {
+                    shoppingLIst = items;
+                    shoppingLIst.CollectionChanged += ShoppingList_CollectionChanged;
+                }
             }
         }
-        private async void OnSettingsClicked(object sender, EventArgs e)
+
+        private async void OnGoToTrash(object? sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SecondPage(shoppingLIst));
+        }
+
+        private void OnCliccked(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(search.Text))
+            {
+                shoppingLIst.Add(search.Text.Trim());
+                search.Text = string.Empty;
+            }
+        }
+        private async void OnSettingClicked(object sender, EventArgs e)
         {
             string action = await DisplayActionSheet("Сменить тему", "Отмена", null, "Светлая", "Тёмная");
             switch (action)
@@ -65,10 +63,13 @@ namespace MauiApp1
                 case "Светлая":
                     Application.Current.UserAppTheme = AppTheme.Light;
                     break;
+
                 case "Тёмная":
                     Application.Current.UserAppTheme = AppTheme.Dark;
                     break;
             }
         }
     }
+
+   
 }
