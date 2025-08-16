@@ -62,10 +62,12 @@ namespace MauiApp1
             {
                 case "Светлая":
                     Application.Current.UserAppTheme = AppTheme.Light;
+                    Preferences.Default.Set("AppTheeme", "Light");
                     break;
 
                 case "Тёмная":
                     Application.Current.UserAppTheme = AppTheme.Dark;
+                    Preferences.Default.Set("AppTheeme", "Dark");
                     break;
             }
         }
